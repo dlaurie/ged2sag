@@ -1,0 +1,30 @@
+Prehistory
+----------
+
+June 2016
+:   Discussions on SAGenealogie.com on the need to update GEN2SA, 
+    a program written in Clipper for MSDOS that is avaiable gratis but
+    only as a binary and requires DOS emulation software to run on modern 
+    systems.
+
+July to December 2016
+:   Various false starts in search of a language in which to write a new
+    free _libre_ open-source program.
+
+January 2017
+:   LifeLines identified as a basis, despite itself being software from
+    the 1990s that has hardly evolved since then, for the following
+    reasons:
+    1. Lossless importing of GEDCOM files
+    2. Powerful scripting language for report generation
+    3. Revitalized development team with source repository on
+        [GitHub](https://github.com/MarcNo/lifelines)
+    4. Linux-friendly (in Ubuntu, which is my system) but porting
+        to Windows is not an unsurmountable obstacle
+
+9 February 2017
+:   GitHub repository created.
+
+19 February 2017
+:   `gedcom.lua` module seems to be working so far as it goes.
+

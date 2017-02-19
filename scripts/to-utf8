@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Convert GEDCOM encoding to UTF-8
+
+case "`grep -i "1 CHAR" $1 | sed -e "s/1 CHAR //"`" in
+  "ANSI" )
+    iconv -f CP1252 -t UTF-8 =o $2 $1;;
+  "UTF-8" )
+    cp $1 $2;;
+esac

@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# GEDCOM to LifeLines converter.
+# Author: Steve Dum (Dr Doom)
+# Source: LifeLines Genealogical System <LINES-L@listserv.nodak.edu>
+# Date: 5 February 2017
+
+LLINES=llines
+
+function usage {
+     cat <<EOF
+usage: $0 gedcomfile
+    Create a new db using gedcomfile.  Use the basename of gedcomfile as the
+    name of the database.  Error out if a database already exists by that
+    name.  This script doesn't use the llines LLDATABASES setting to find out
+    where to create the database, It will try to create database in the
+    same directory as the gedcom file.
+    This simple script requires that gedcomfile is of the form name.ext
+    where ext should be .ged, but both name and ext can be any valid strings
+EOF
+     exit $1
+}
+
+if [[ $# != 1 ]] ; then
+     usage 1
+fi
+
+FILE=$1
+
+DIR=${FILE%/*}
+if [[ $DIR == $FILE ]] ; then
+     DIR=""
+else
+     DIR=$DIR/
+fi
+GED=${FILE##*/}
+BASE=${GED%.*}
+if [[ $BASE == $GED  ]] ; then
+     echo "gedcomfile doesn't end in an extension"
+     usage 1
+fi
+if [[ -e $DIR$BASE ]]; then
+     echo "Error database $DIR$BASE already exists, aborting"
+     usage 1
+fi
+echo parm1=$FILE DIR=$DIR BASE=$BASE extension=.ged
+
+
+cat <<EOF | script -c "$LLINES $DIR$BASE"
+y
+ur$FILE
+nq
+q
+EOF
