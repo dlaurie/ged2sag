@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="installasie-en-gebruik-van-die-gedcom-na-sag-omskakelaar">Installasie en gebruik van die GEDCOM-na-SAG omskakelaar</h1>
+<h2 id="op-windows-10">1. Op Windows 10</h2>
+<p>Jy het die <em>Windows Shell for Linux</em> nodig. Besoek <a href="https://msdn.microsoft.com/en-us/commandline/wsl/install_guide">hierdie webblad</a> en volg die instruksies. Maak die WSL oop (daar staan bes moontlik iets soos &quot;Bash for Windows&quot;). Jy kry 'n pikswart skerm met iets in die linkerboonste hoek. Hiervandaan werk dit asof jy 'n terminaal oop het op 'n masjien werk waarop Ubuntu geïnstalleer is. Gaan na Stap 2.</p>
+<h2 id="op-ubuntu">2. Op Ubuntu</h2>
+<p>Jy het die program LifeLines, die verslagprogram <code>sag.ll</code> en jou GEDCOM-lêer nodig. As jy reeds die eerste twee het, spring direk na Stap 5. As jy jou GEDCOM-lêer reeds na 'n LifeLines-databasis omgeskakel het, spring direk na Stap 6.</p>
+<p>Maak vir jou 'n omslag waarin jy alles in verband met hierdie program gaan bêre, sê GED2SAG en gaan na hom. Kopieer jou GEDCOM soontoe. Tik <code>ls</code> om te kyk wat het jy nou. Jy moet iets sien soos</p>
+<pre><code>…/GED2SAG$ ls
+mygedcom.ged
+…/GED2SAG$   </code></pre>
+<p>Telkens hierna gaan ek wys wat op jou skerm staan nadat jy 'n opdrag ingetik het. Alles tot by die dollarteken word deur jou masjien gedoen, ook alles op reëls wat nie sollartekens het nie. Jy tik net telkens in wat hier na die dollarteken staan, gevolg deur Enter (die krom pyl).</p>
+<h2 id="installeer-lifelines">3. Installeer LifeLines</h2>
+<p>Doen die volgende:</p>
+<pre><code>…/GED2SAG$ apt-get install lifelines lifelines-doc lifelines-report
+…/GED2SAG$ ls /usr/share/lifelines/extract*
+/usr/share/lifelines/extract_gedcom.ll  /usr/share/lifelines/extract_set.li
+/usr/share/lifelines/extract_html.ll
+…/GED2SAG$</code></pre>
+<p>Die tweede reëltjie is net om jou gerus te stel dat alles daar is wat daar moet wees.</p>
+<h2 id="installeer-sag.ll">4. Installeer <code>sag.ll</code></h2>
+<p>Doen die volgende:</p>
+<pre><code>…/GED2SAG$ git clone http://github.com/dlaurie/ged2sag
+Cloning into &#39;ged2sag&#39;...
+remote: Counting objects: 13, done.
+remote: Total 13 (delta 0), reused 0 (delta 0), pack-reused 13
+Unpacking objects: 100% (13/13), done.
+Checking connectivity... done.
+…/GED2SAG$ cp ged2sag/scripts/sag.ll .
+…/GED2SAG$ ls
+ged2sag  mygedcom.ged  sag.ll
+…/GED2SAG$ </code></pre>
+<h2 id="omskep-jou-gedcom-in-n-databasis">5. Omskep jou GEDCOM in 'n databasis</h2>
+<p>Doen die volgende:</p>
+<pre><code>…/GED2SAG$ llines</code></pre>
+<p>Hiervandaan af kom daar 'n aantal menu's op. Party het keuses gemerk met letters by hulle tik jy net die betrokke letter en daar gebeur duidelik iets; ander gee vir jou 'n lyntjie waarop jy 'n aantal karakters gevolg deur Enter moet intik.</p>
+<p>Die eerste menu vra: &quot;Enter path&quot;. Dit is 'n tegniese manier om te vra wat die naam van jou databasis gaan wees. 'n Goeie keuse is die naam van jou GEDCOM sonder die stertjie.</p>
+<pre><code>What directory holds (or will hold) the LifeLines database? (? to list)
+enter path:  mygedcom</code></pre>
+<p>Aangesien daardie databasis nog nie bestaan nie, kry jy 'n vragie om seker te maak dis wat jy wil hê.</p>
+<pre><code>There is no LifeLines database in that directory.
+Do you want to create a database there?
+enter yes (y) or no (n): n</code></pre>
+<p>Nou gaan jy jou GEDCOM inlees. Dit wys etlike opsies, die een wat jy kies is <code>u</code> (&quot;Miscellaneous utilities&quot;). Dit sal 'n submenu laat verskyn.</p>
+<pre><code>Please choose an operation: u</code></pre>
+<p>Op die volgende menu kies jy R (&quot;Pick a GEDCOM file and read in&quot;).</p>
+<pre><code>What utility do you want to perform? R</code></pre>
+<p>Nou kry jy weer 'n submenu.</p>
+<pre><code>Please enter the name of the GEDCOM file. (1/2)
+  &gt;1: &lt;Choose outside this list&gt;
+   2: mygedcom.ged (06 Feb 2017 - 447Kb) [WikiTree.com]</code></pre>
+<p>Tik net <code>2</code>. daar verskyn 'n skermpie met syfers wat vinnig verander. As dit stop, staan daar:</p>
+<pre><code>Checking GEDCOM file for errors.
+    290 Persons                                                      
+     23 Families
+      0 Sources                                              
+      0 Events                                                       
+      1 Other (SUBM)                                                 
+      0 Errors                                                       
+      0 Warnings                                                     
+Import time 01s (ui 1m02s)                                           
+No errors; adding records with new keys...                           
+    290 Persons                                                      
+    123 Families                                                     
+      0 Sources                                                      
+      0 Events                                                       
+      1 Other (SUBM)                                                 
+
+Strike any key to continue. </code></pre>
+<p>Jy is nou terug by jou hoofkeuselys. Dit is moontlik om direk hiervandaan die SAG-lêer te maak, maar daar is meer buigsaamheid as jy liewer uitgaan. Druk <code>q</code> totdat jy weer die WSL se swart skerm sien.</p>
+<h2 id="uitdruk-van-jou-gedcom-as-sag">6. Uitdruk van jou GEDCOM as SAG</h2>
+<p>Ons maak eers seker jy het alles.</p>
+<pre><code>…/GED2SAG$ ls
+ged2sag  mygedcom  mygedcom.ged  sag.ll
+…/GED2SAG$</code></pre>
+<p>Daar is jou databasis in <code>mygedcom</code> en die uitdrukprogram <code>sag.ll</code>. Ons het nie nou die ander twee nodig nie, maar dis gerusstellend om hulle daar te sien. Ek wil tog benadruk: die GEDCOM self word nie in hierdie stap gebruik nie, as is hy nog daar, net die databasis wat in Stap 5 gemaak is.</p>
+<p>Nou kom die uitdruk-opdrag. Ek maak dit doelbewus meer ingewikkeld as nodig; ons kan dit later vereenvoudig.</p>
+<pre><code>…/GED2SAG$ llexec -x ./sag.ll -o sag.html -Istart=I1 -Iformat=html -Idepth=100 mygedcom
+Program is running...Program was run successfully.
+…/GED2SAG$ ls
+ged2sag  mygedcom  mygedcom.ged  sag.html  sag.ll
+…/GED2SAG$</code></pre>
+<p>Daar in <code>sag.html</code> staan jou SAG-geformatteerde uitvoer. Die <code>-I</code> opsies op die uitdruk-reël kan almal weggelaat word, en sal dan die waardes soos hierbo hê. M.a.w. jy kon net ingetik het</p>
+<pre><code>…/GED2SAG$ llexec -x ./sag.ll -o sag.html mygedcom</code></pre>
+<p>en die resultaat sou dieselfde gewees het. Die <code>-x</code> en <code>-o</code> opsies is egter nodig.</p>
+</body>
+</html>

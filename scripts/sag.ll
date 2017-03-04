@@ -85,7 +85,12 @@ proc gen2sa(persoon,geslag,nommer) {
     }    
     call beskryf(eggenoot) "\n" 
     set(vorige,nchildren(gesin))
-    children (gesin, kind, j) {
+    indiset(kinders)  /* Maak lys van kinders met geboortedatum */
+    children(gesin,kind,j) {
+      addtoset(kinders,kind,date2jd(birth(kind)))
+    }
+    valuesort(kinders)  /* sorteer van oudste na jongste */
+    forindiset (kinders, kind, ongebruik, j) {
       incr(kindno)
       call gen2sa(kind,add(geslag,1),kindno)
     }
