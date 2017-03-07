@@ -10,37 +10,56 @@
 <body>
 <h1 id="installasie-en-gebruik-van-die-gedcom-na-sag-omskakelaar">Installasie en gebruik van die GEDCOM-na-SAG omskakelaar</h1>
 <h2 id="op-windows-10">1. Op Windows 10</h2>
-<p>Jy het die <em>Windows Shell for Linux</em> nodig. Besoek <a href="https://msdn.microsoft.com/en-us/commandline/wsl/install_guide">hierdie webblad</a> en volg die instruksies. Maak die WSL oop (daar staan bes moontlik iets soos &quot;Bash for Windows&quot;). Jy kry 'n pikswart skerm met iets in die linkerboonste hoek. Hiervandaan werk dit asof jy 'n terminaal oop het op 'n masjien werk waarop Ubuntu geïnstalleer is. Gaan na Stap 2.</p>
+<p>Jy het die <em>Windows Shell for Linux</em> nodig. Besoek <a href="https://msdn.microsoft.com/en-us/commandline/wsl/install_guide">hierdie webblad</a> en volg die instruksies. Maak die WSL oop (daar staan bes moontlik iets soos &quot;Bash for Windows&quot;). Jy kry 'n pikswart skerm met iets in die linkerboonste hoek, bv.</p>
+<pre><code>Piet@PIET-SE-PC:~$</code></pre>
+<p>Die stukkie voor die dubbelpunt identifiseer die gebruiker en masjien; die volgende stukkie sê in watter omslag jy is. Die slangetjie is jou WSL-tuisomslag. Dis nie dieselfde as jou Windows-tuisomslag nie.</p>
+<p>Ek gaan daardie <code>Piet@PIET-SE-PC:~</code> afkort na dotjies. Wanneer ek iets soos</p>
+<pre><code>…$ ll</code></pre>
+<p>skryf, beteken dit jy moet <code>ll</code> intik gevolg deur Enter (die krom pyl).</p>
+<p>Jou eerste taak is om jou Windows-tuisomslag onder WSL sigbaar te maak.</p>
+<pre><code>…$ ln -s /mnt/c/Users/Piet Tuis</code></pre>
+<p>Kyk of dit daar is:</p>
+<pre><code>…$ ls Tuis</code></pre>
+<p>Jy sal 'n lys sien van wat in jou Windows-tuisomslag is.</p>
+<p>Hiervandaan werk dit asof jy 'n terminaal oop het na 'n masjien waarop Ubuntu geïnstalleer is.</p>
+<p>Gaan na Stap 2.</p>
 <h2 id="op-ubuntu">2. Op Ubuntu</h2>
 <p>Jy het die program LifeLines, die verslagprogram <code>sag.ll</code> en jou GEDCOM-lêer nodig. As jy reeds die eerste twee het, spring direk na Stap 5. As jy jou GEDCOM-lêer reeds na 'n LifeLines-databasis omgeskakel het, spring direk na Stap 6.</p>
-<p>Maak vir jou 'n omslag waarin jy alles in verband met hierdie program gaan bêre, sê GED2SAG en gaan na hom. Kopieer jou GEDCOM soontoe. Tik <code>ls</code> om te kyk wat het jy nou. Jy moet iets sien soos</p>
-<pre><code>…/GED2SAG$ ls
-mygedcom.ged
-…/GED2SAG$   </code></pre>
-<p>Telkens hierna gaan ek wys wat op jou skerm staan nadat jy 'n opdrag ingetik het. Alles tot by die dollarteken word deur jou masjien gedoen, ook alles op reëls wat nie sollartekens het nie. Jy tik net telkens in wat hier na die dollarteken staan, gevolg deur Enter (die krom pyl).</p>
+<p>Maak vir jou 'n omslag waarin jy alles in verband met hierdie program gaan bêre, sê GED, en gaan na hom.</p>
+<pre><code>…$ mkdir GED
+…$ cd GED
+…/GED$</code></pre>
+<p>Kopieer jou GEDCOM soontoe, byvoorbeeld</p>
+<pre><code> …/GED$ cp ~/Piet/&quot;My ingewikkelde naam.ged&quot; mygedcom.ged</code></pre>
+<p>Jy gaan jouself baie moeite bespaar as jy onder WSL net name gebruik wat nie spasies bevat nie.</p>
+<p>Tik <code>ls</code> om te kyk wat het jy nou. Jy moet iets sien soos</p>
+<pre><code>…/GED$ ll
+-rw-rw-r--  1 dirk dirk 447918 Mar  4 12:13 mygedcom.ged
+…/GED$   </code></pre>
+<p>Dit beteken <code>mygedcom.ged</code> is laas om 12:13 op 4 Maart verander, en dit is 447918 karakters lank.</p>
 <h2 id="installeer-lifelines">3. Installeer LifeLines</h2>
 <p>Doen die volgende:</p>
-<pre><code>…/GED2SAG$ apt-get install lifelines lifelines-doc lifelines-report
-…/GED2SAG$ ls /usr/share/lifelines/extract*
+<pre><code>…/GED$ apt-get install lifelines lifelines-doc lifelines-report
+…/GED$ ls /usr/share/lifelines/extract*
 /usr/share/lifelines/extract_gedcom.ll  /usr/share/lifelines/extract_set.li
 /usr/share/lifelines/extract_html.ll
-…/GED2SAG$</code></pre>
-<p>Die tweede reëltjie is net om jou gerus te stel dat alles daar is wat daar moet wees.</p>
+…/GED$</code></pre>
+<p>Die tweede reëltjie is 'n lys van party stukkies van LifeLines, net om jou gerus te stel dat alles daar is wat daar moet wees.</p>
 <h2 id="installeer-sag.ll">4. Installeer <code>sag.ll</code></h2>
 <p>Doen die volgende:</p>
-<pre><code>…/GED2SAG$ git clone http://github.com/dlaurie/ged2sag
+<pre><code>…/GED$ git clone http://github.com/dlaurie/ged2sag
 Cloning into &#39;ged2sag&#39;...
 remote: Counting objects: 13, done.
 remote: Total 13 (delta 0), reused 0 (delta 0), pack-reused 13
 Unpacking objects: 100% (13/13), done.
 Checking connectivity... done.
-…/GED2SAG$ cp ged2sag/scripts/sag.ll .
-…/GED2SAG$ ls
+…/GED$ cp ged2sag/scripts/sag.ll .
+…/GED$ ls
 ged2sag  mygedcom.ged  sag.ll
-…/GED2SAG$ </code></pre>
+…/GED$ </code></pre>
 <h2 id="omskep-jou-gedcom-in-n-databasis">5. Omskep jou GEDCOM in 'n databasis</h2>
 <p>Doen die volgende:</p>
-<pre><code>…/GED2SAG$ llines</code></pre>
+<pre><code>…/GED$ llines</code></pre>
 <p>Hiervandaan af kom daar 'n aantal menu's op. Party het keuses gemerk met letters by hulle tik jy net die betrokke letter en daar gebeur duidelik iets; ander gee vir jou 'n lyntjie waarop jy 'n aantal karakters gevolg deur Enter moet intik.</p>
 <p>Die eerste menu vra: &quot;Enter path&quot;. Dit is 'n tegniese manier om te vra wat die naam van jou databasis gaan wees. 'n Goeie keuse is die naam van jou GEDCOM sonder die stertjie.</p>
 <pre><code>What directory holds (or will hold) the LifeLines database? (? to list)
@@ -76,20 +95,69 @@ No errors; adding records with new keys...
 
 Strike any key to continue. </code></pre>
 <p>Jy is nou terug by jou hoofkeuselys. Dit is moontlik om direk hiervandaan die SAG-lêer te maak, maar daar is meer buigsaamheid as jy liewer uitgaan. Druk <code>q</code> totdat jy weer die WSL se swart skerm sien.</p>
+<p>As daar probleme hier was (dws jy kry nie <code>No errors</code> nie, maar 'n boodskap wat sê hoeveel foute daar was en waar die lys foute gevind kan word, waarskynlik op <code>errs.log</code>) <em>moet jy eers die foute regmaak</em>. Dinge soos mense wat nie 'n naam het nie, families wat nie bestaan nie, ensovoorts. LifeLines is baie punteneurig en daar mag glad nie foute in die GEDCOM wees nie. Oor die algemeen sal 'n GEDCOM wat vars gemaak is vanaf die Internet of deur 'n streng PC-program foutloos wees, maar as mense met die hand daaraan geredigeer het, is enigiets moontlik.</p>
 <h2 id="uitdruk-van-jou-gedcom-as-sag">6. Uitdruk van jou GEDCOM as SAG</h2>
 <p>Ons maak eers seker jy het alles.</p>
-<pre><code>…/GED2SAG$ ls
+<pre><code>…/GED$ ls
 ged2sag  mygedcom  mygedcom.ged  sag.ll
-…/GED2SAG$</code></pre>
+…/GED$</code></pre>
 <p>Daar is jou databasis in <code>mygedcom</code> en die uitdrukprogram <code>sag.ll</code>. Ons het nie nou die ander twee nodig nie, maar dis gerusstellend om hulle daar te sien. Ek wil tog benadruk: die GEDCOM self word nie in hierdie stap gebruik nie, as is hy nog daar, net die databasis wat in Stap 5 gemaak is.</p>
 <p>Nou kom die uitdruk-opdrag. Ek maak dit doelbewus meer ingewikkeld as nodig; ons kan dit later vereenvoudig.</p>
-<pre><code>…/GED2SAG$ llexec -x ./sag.ll -o sag.html -Istart=I1 -Iformat=html -Idepth=100 mygedcom
+<pre><code>…/GED$ llexec -x ./sag.ll -o sag.html -Istart=I1 -Iformat=html -Idepth=100 mygedcom
 Program is running...Program was run successfully.
-…/GED2SAG$ ls
+…/GED$ ls
 ged2sag  mygedcom  mygedcom.ged  sag.html  sag.ll
-…/GED2SAG$</code></pre>
+…/GED$</code></pre>
 <p>Daar in <code>sag.html</code> staan jou SAG-geformatteerde uitvoer. Die <code>-I</code> opsies op die uitdruk-reël kan almal weggelaat word, en sal dan die waardes soos hierbo hê. M.a.w. jy kon net ingetik het</p>
-<pre><code>…/GED2SAG$ llexec -x ./sag.ll -o sag.html mygedcom</code></pre>
+<pre><code>…/GED$ llexec -x ./sag.ll -o sag.html mygedcom</code></pre>
 <p>en die resultaat sou dieselfde gewees het. Die <code>-x</code> en <code>-o</code> opsies is egter nodig.</p>
+<p>Jy wil dalk nou <code>sag.html</code> skuif na waar Windows dit ook kan sien.</p>
+<pre><code>…/GED$ mv sag.html ~/Piet/&quot;Lekker lang naam.html&quot;</code></pre>
+<p>Windows gee nie om as daar spasies in die naam is nie.</p>
+<h2 id="terug-in-windows">7. Terug in Windows</h2>
+<p>Jy kan nou met Windows Explorer kyk hoe lyk daardie HTML-lêer, hom intrek in Word, ens.</p>
+<h1 id="probleme">Probleme</h1>
+<ol style="list-style-type: decimal">
+<li><em>Ek het bietjie opgemors en nou lê daar 'n klomp gemors in my WSL-tuisomslag rond</em>.</li>
+</ol>
+<ul>
+<li><code>rmdir omslag</code> vee 'n leë omslag uit.</li>
+<li><code>rm -r omslag</code> vee 'n omslag met alles daarin uit.</li>
+<li><code>rm leer1 leer2 leer3</code> vee die een of meer genoemde lêers uit.</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><p><em>As ek <code>ged2sag</code> probeer aflaai, kry ek 'n boodskap soos:</em></p>
+<p>fatal: destination path 'ged2sag' already exists.</p></li>
+</ol>
+<p>Jy moet dit net een keer aflaai. As jy dit wil vernuwe, gaan na <code>ged2sag</code> en vra vir die nuutste weergawe, soos volg:</p>
+<pre><code>…$ cd ~/GED/ged2sag
+…/GED/gedsag$ git pull
+remote: Counting objects: 7, done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 7 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (7/7), done.
+From http://github.com/dlaurie/ged2sag
+   d3ae85b..4b83de9  master     -&gt; origin/master
+Updating d3ae85b..4b83de9
+Fast-forward
+ README.md              |   2 +
+ doc/stap-vir-stap.html |  95 +++++++++++++++
+ scripts/sag.ll         |   7 +-
+ 4 files changed, 103 insertions(+), 316 deletions(-)</code></pre>
+<p>Die rapport oor wat gedoen is, sal nie presies soos bo lyk nie, maar iets van daardie aard.</p>
+<ol start="3" style="list-style-type: decimal">
+<li><p><em>Ek kry 'n boodskap soos:</em></p>
+<p>The program 're' is not currently installed. You can install it ...</p></li>
+</ol>
+<p><strong>Moenie dit installeer nie.</strong> Jy het 'n tikfout gemaak en byna enige kort woorjie lyk in Ubuntu na die naam van 'n program.</p>
+<ol start="4" style="list-style-type: decimal">
+<li><em>Ek het &quot;Lifelines&quot; geGoogle vir ekstra inligting en dit lyk na iets wat met lewensversekering te doen het</em>.</li>
+</ol>
+<p>Daar is 'n ander program met dieselfde naam. Moenie dit probeer aflaai nie.</p>
+<ol start="5" style="list-style-type: decimal">
+<li><p><em>Ek kry 'n boodskap soos:</em></p>
+<p>rm--help: command not found</p></li>
+</ol>
+<p>Ha, slim! Jy het ontdek dat baie opdragte in Ubuntu jou sal vertel hoe jy hulle moet gebruik: jy moet net hulp vra. Maar dit gaan net wer as daar 'n spasie na die opdrag is. <code>rm --help</code>.</p>
 </body>
 </html>
