@@ -67,7 +67,7 @@ enter path:  mygedcom</code></pre>
 <p>Aangesien daardie databasis nog nie bestaan nie, kry jy 'n vragie om seker te maak dis wat jy wil hê.</p>
 <pre><code>There is no LifeLines database in that directory.
 Do you want to create a database there?
-enter yes (y) or no (n): n</code></pre>
+enter yes (y) or no (n): y</code></pre>
 <p>Nou gaan jy jou GEDCOM inlees. Dit wys etlike opsies, die een wat jy kies is <code>u</code> (&quot;Miscellaneous utilities&quot;). Dit sal 'n submenu laat verskyn.</p>
 <pre><code>Please choose an operation: u</code></pre>
 <p>Op die volgende menu kies jy R (&quot;Pick a GEDCOM file and read in&quot;).</p>
@@ -101,7 +101,7 @@ Strike any key to continue. </code></pre>
 <pre><code>…/GED$ ls
 ged2sag  mygedcom  mygedcom.ged  sag.ll
 …/GED$</code></pre>
-<p>Daar is jou databasis in <code>mygedcom</code> en die uitdrukprogram <code>sag.ll</code>. Ons het nie nou die ander twee nodig nie, maar dis gerusstellend om hulle daar te sien. Ek wil tog benadruk: die GEDCOM self word nie in hierdie stap gebruik nie, as is hy nog daar, net die databasis wat in Stap 5 gemaak is.</p>
+<p>Daar is jou databasis in <code>mygedcom</code> en die uitdrukprogram <code>sag.ll</code>. Ons het nie nou die ander twee nodig nie, maar dis gerusstellend om hulle daar te sien. Ek wil tog benadruk: die GEDCOM self word nie in hierdie stap gebruik nie, al is hy nog daar, net die databasis wat in Stap 5 gemaak is.</p>
 <p>Nou kom die uitdruk-opdrag. Ek maak dit doelbewus meer ingewikkeld as nodig; ons kan dit later vereenvoudig.</p>
 <pre><code>…/GED$ llexec -x ./sag.ll -o sag.html -Istart=I1 -Iformat=html -Idepth=100 mygedcom
 Program is running...Program was run successfully.
@@ -127,7 +127,7 @@ ged2sag  mygedcom  mygedcom.ged  sag.html  sag.ll
 </ul>
 <ol start="2" style="list-style-type: decimal">
 <li><p><em>As ek <code>ged2sag</code> probeer aflaai, kry ek 'n boodskap soos:</em></p>
-<p>fatal: destination path 'ged2sag' already exists.</p></li>
+<pre><code>fatal: destination path &#39;ged2sag&#39; already exists.</code></pre></li>
 </ol>
 <p>Jy moet dit net een keer aflaai. As jy dit wil vernuwe, gaan na <code>ged2sag</code> en vra vir die nuutste weergawe, soos volg:</p>
 <pre><code>…$ cd ~/GED/ged2sag
@@ -147,7 +147,7 @@ Fast-forward
 <p>Die rapport oor wat gedoen is, sal nie presies soos bo lyk nie, maar iets van daardie aard.</p>
 <ol start="3" style="list-style-type: decimal">
 <li><p><em>Ek kry 'n boodskap soos:</em></p>
-<p>The program 're' is not currently installed. You can install it ...</p></li>
+<pre><code>The program &#39;re&#39; is not currently installed. You can install it ...</code></pre></li>
 </ol>
 <p><strong>Moenie dit installeer nie.</strong> Jy het 'n tikfout gemaak en byna enige kort woorjie lyk in Ubuntu na die naam van 'n program.</p>
 <ol start="4" style="list-style-type: decimal">
@@ -156,8 +156,8 @@ Fast-forward
 <p>Daar is 'n ander program met dieselfde naam. Moenie dit probeer aflaai nie.</p>
 <ol start="5" style="list-style-type: decimal">
 <li><p><em>Ek kry 'n boodskap soos:</em></p>
-<p>rm--help: command not found</p></li>
+<pre><code>rm--help: command not found</code></pre></li>
 </ol>
-<p>Ha, slim! Jy het ontdek dat baie opdragte in Ubuntu jou sal vertel hoe jy hulle moet gebruik: jy moet net hulp vra. Maar dit gaan net wer as daar 'n spasie na die opdrag is. <code>rm --help</code>.</p>
+<p>Ha, slim! Jy het ontdek dat baie opdragte in Ubuntu jou sal vertel hoe jy hulle moet gebruik: jy moet net hulp vra. Maar dit gaan net werk as daar 'n spasie na die opdrag is. <code>rm --help</code>.</p>
 </body>
 </html>
